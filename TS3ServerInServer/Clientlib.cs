@@ -35,6 +35,29 @@ namespace TS3ServerInServer {
 			}
 		}
 	}
+	public sealed class ChannelListResponse : IResponse
+	{
+		public string ReturnCode { get; set; }
+
+		public ChannelIdT channelID { get; set; }
+		public System.UInt64 pid { get; set; }
+		public System.UInt64 channel_order { get; set; }
+		public string channel_name { get; set; }
+		public bool subscribed { get; set; }
+
+		public void SetField(string name, string value)
+		{
+			switch (name)
+			{
+				case "cid": channelID = CommandDeserializer.DeserializeUInt64(value); break;
+				case "pid": pid = CommandDeserializer.DeserializeUInt64(value); break;
+				case "channel_order": channel_order = CommandDeserializer.DeserializeUInt64(value); break;
+				case "channel_name": channel_name = CommandDeserializer.DeserializeString(value); break;
+				case "channel_flag_are_subscribed": subscribed = CommandDeserializer.DeserializeBool(value); break;
+			}
+		}
+	}
+
 	class Clientlib {
 		static Random random = new Random();
 		public static string RandomString(int length) {
@@ -45,6 +68,11 @@ namespace TS3ServerInServer {
 
 		public static IEnumerable<ChannelGroupListResponse> GetAllChannelGroups(Ts3FullClient client) {
 			 return client.Send<ChannelGroupListResponse>("channelgrouplist");
+		}
+
+		public static IEnumerable<ChannelListResponse> GetChannelList(Ts3FullClient client)
+		{
+			return client.Send<ChannelListResponse>("channellist");
 		}
 
 		public static IEnumerable<ResponseDictionary> SetClientChannelGroup(Ts3FullClient cli, ChannelGroupIdT cgid, ChannelIdT cid, ClientDbIdT cldbid) {
