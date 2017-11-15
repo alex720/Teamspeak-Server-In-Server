@@ -252,3 +252,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+
+TS3ServerInServer.sln
+TS3ServerInServer/TS3ServerInServer.csproj
