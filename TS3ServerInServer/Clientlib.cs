@@ -50,7 +50,7 @@ namespace TS3ServerInServer {
 			switch (name)
 			{
 				case "cid": channelID = CommandDeserializer.DeserializeUInt64(value); break;
-				case "pid": pid = CommandDeserializer.DeserializeUInt64(value); break;
+				case "cpid": pid = CommandDeserializer.DeserializeUInt64(value); break;
 				case "channel_order": channel_order = CommandDeserializer.DeserializeUInt64(value); break;
 				case "channel_name": channel_name = CommandDeserializer.DeserializeString(value); break;
 				case "channel_flag_are_subscribed": subscribed = CommandDeserializer.DeserializeBool(value); break;
